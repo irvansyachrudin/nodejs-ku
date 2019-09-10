@@ -1,0 +1,298 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>CRUD Node.js and Mysql</title>
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/assets/css/datepicker3.css" rel="stylesheet">
+  <link href="/assets/css/styles.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span></button>
+        <a class="navbar-brand" href="#"><span>MY</span>Admin</a>
+        <ul class="nav navbar-top-links navbar-right">
+          <li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+              <em class="fa fa-envelope"></em><span class="label label-danger">15</span>
+            </a>
+            <ul class="dropdown-menu dropdown-messages">
+              <li>
+                <div class="dropdown-messages-box"><a href="profile.html" class="pull-left">
+                    <img alt="image" class="img-circle" src="http://placehold.it/40/30a5ff/fff">
+                  </a>
+                  <div class="message-body"><small class="pull-right">3 mins ago</small>
+                    <a href="#"><strong>John Doe</strong> commented on <strong>your photo</strong>.</a>
+                    <br /><small class="text-muted">1:24 pm - 25/03/2015</small></div>
+                </div>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <div class="dropdown-messages-box"><a href="profile.html" class="pull-left">
+                    <img alt="image" class="img-circle" src="http://placehold.it/40/30a5ff/fff">
+                  </a>
+                  <div class="message-body"><small class="pull-right">1 hour ago</small>
+                    <a href="#">New message from <strong>Jane Doe</strong>.</a>
+                    <br /><small class="text-muted">12:27 pm - 25/03/2015</small></div>
+                </div>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <div class="all-button"><a href="#">
+                    <em class="fa fa-inbox"></em> <strong>All Messages</strong>
+                  </a></div>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+              <em class="fa fa-bell"></em><span class="label label-info">5</span>
+            </a>
+            <ul class="dropdown-menu dropdown-alerts">
+              <li><a href="#">
+                  <div><em class="fa fa-envelope"></em> 1 New Message
+                    <span class="pull-right text-muted small">3 mins ago</span></div>
+                </a></li>
+              <li class="divider"></li>
+              <li><a href="#">
+                  <div><em class="fa fa-heart"></em> 12 New Likes
+                    <span class="pull-right text-muted small">4 mins ago</span></div>
+                </a></li>
+              <li class="divider"></li>
+              <li><a href="#">
+                  <div><em class="fa fa-user"></em> 5 New Followers
+                    <span class="pull-right text-muted small">4 mins ago</span></div>
+                </a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div><!-- /.container-fluid -->
+  </nav>
+  <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+    <div class="profile-sidebar">
+      <div class="profile-userpic">
+        <img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+      </div>
+      <div class="profile-usertitle">
+        <div class="profile-usertitle-name">{{ nama }}</div>
+        <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="divider"></div>
+    <form role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
+    </form>
+    <ul class="nav menu">
+      <li><a href="#"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+      <li class="active"><a href="#"><em class="fa fa-clone">&nbsp;</em> Data Master</a></li>
+      <li><a href="#"><em class="fa fa-bar-chart">&nbsp;</em> Charts</a></li>
+      <li><a href="#"><em class="fa fa-toggle-off">&nbsp;</em> UI Elements</a></li>
+      <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
+          <em class="fa fa-navicon">&nbsp;</em> Multilevel <span data-toggle="collapse" href="#sub-item-1"
+            class="icon pull-right"><em class="fa fa-plus"></em></span>
+        </a>
+        <ul class="children collapse" id="sub-item-1">
+          <li><a class="" href="#">
+              <span class="fa fa-arrow-right">&nbsp;</span> Sub Item 1
+            </a></li>
+          <li><a class="" href="#">
+              <span class="fa fa-arrow-right">&nbsp;</span> Sub Item 2
+            </a></li>
+          <li><a class="" href="#">
+              <span class="fa fa-arrow-right">&nbsp;</span> Sub Item 3
+            </a></li>
+        </ul>
+      </li>
+      <li><a href="/logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+    </ul>
+  </div>
+  <!--/.sidebar-->
+
+  <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">Produk</h1>
+      </div>
+    </div>
+    <!--/.row-->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Latest Product
+          </div>
+          <div class="panel-body">
+
+            <!--End .article-->
+
+
+            <!--End .article-->
+
+            <div class="article">
+              <div class="col-xs-12">
+                <div class="row">
+
+                  <button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Add New</button>
+
+
+                  <table class="table table-striped" id="mytable">
+                    <thead>
+                      <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{#each results}}
+                      <tr>
+                        <td>{{ product_id }}</td>
+                        <td>{{ product_name }}</td>
+                        <td>{{ product_price }}</td>
+                        <td>
+                          <a href="javascript:void(0);" class="btn btn-sm btn-info edit" data-id="{{ product_id }}"
+                            data-product_name="{{ product_name }}" data-product_price="{{ product_price }}">Edit</a>
+                          <a href="javascript:void(0);" class="btn btn-sm btn-danger delete"
+                            data-id="{{ product_id }}">Delete</a>
+                        </td>
+                      </tr>
+                      {{/each}}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <!--End .article-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add New Product Modal-->
+  <form action="/save" method="post">
+    <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <input type="text" name="product_name" class="form-control" placeholder="Product Name" required>
+            </div>
+
+            <div class="form-group">
+              <input type="text" name="product_price" class="form-control" placeholder="Price" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Edit Product Modal-->
+  <form action="/update" method="post">
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <input type="text" name="product_name" class="form-control product_name" placeholder="Product Name"
+                required>
+            </div>
+
+            <div class="form-group">
+              <input type="text" name="product_price" class="form-control price" placeholder="Price" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="hidden" name="id" class="product_id">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Delete Product Modal-->
+  <form id="add-row-form" action="/delete" method="post">
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="myModalLabel">Delete Product</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <strong>Are You Sure To Delete This Data?</strong>
+          </div>
+          <div class="modal-footer">
+            <input type="hidden" name="product_id" class="form-control product_id2" required>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <script src="/assets/js/jquery-1.11.1.min.js"></script>
+  <script src="/assets/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      //showing data to modal for edit record
+      $('#mytable').on('click', '.edit', function () {
+        var product_id = $(this).data('id');
+        var product_name = $(this).data('product_name');
+        var product_price = $(this).data('product_price');
+        $('#EditModal').modal('show');
+        $('.product_name').val(product_name);
+        $('.price').val(product_price);
+        $('.product_id').val(product_id);
+      });
+      //showing modal for delete record
+      $('#mytable').on('click', '.delete', function () {
+        var product_id = $(this).data('id');
+        $('#DeleteModal').modal('show');
+        $('.product_id2').val(product_id);
+      });
+
+    });
+  </script>
+</body>
+
+
+</html>
